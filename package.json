@@ -1,0 +1,28 @@
+{
+  "name": "ToDo",
+  "version": "1.0.0",
+  "description": "Desenvolvimento passo a passo de um projeto completo Full Stack com Adobe XD, NodeJs, MongoDB, ReactJs e Native \r (Curso Prof. Rodrigo Gonçalves Santana.)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon 03-BACKEND/SRC/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FabioMendesBR/ToDo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FabioMendesBR/ToDo/issues"
+  },
+  "homepage": "https://github.com/FabioMendesBR/ToDo#readme",
+  "dependencies": {
+    "date-fns": "^2.14.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.21"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
