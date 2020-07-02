@@ -37,10 +37,11 @@ const TaskValidation = async (req, res, next) => {
         }
                 
         if(exists){
-            return res.status(400).json({ error: 'Já existe uma tarefa neste dia e horario'});
+            return res.status(400).json({ error: 'Já existe uma tarefa neste dia e horário'});
         }                       
         next();
     }
 }
+
 
 module.exports = TaskValidation;

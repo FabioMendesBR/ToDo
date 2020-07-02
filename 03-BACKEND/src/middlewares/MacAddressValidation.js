@@ -6,4 +6,6 @@ const MacAddressValidation = (req, res, next) =>{
 
 };
 
+
+
 module.exports = MacAddressValidation;

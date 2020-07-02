@@ -77,7 +77,21 @@ class TaskController {
         });
     }
 
-
+    async late(req, res){
+        await TaskModel
+        .find({
+           'when': {'$lt': current},
+           'macaddress': {'$in': req.body.macaddress}
+        })
+        .sort('when')
+        .then(response =>{
+            returnres.status(200).json(response);
+        })
+        .catch(error =>{
+            return res.status(500).json(error);
+        })
+    }
 }
+
 
 module.exports = new TaskController();
