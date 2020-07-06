@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+} 
+
+h1{
+  color: blue;
+}
+h3{
+    color: blue; 
+}
+    
+#imgKanban{
+    width: 400px;
+    height: 200px;
+}
+
+ul,li{
+    padding: 20px;
+}
