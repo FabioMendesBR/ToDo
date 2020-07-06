@@ -8,8 +8,8 @@ function TaskCard() {
     <S.Container>
       
         <S.TopCard>
-            <img src="{iconDefault}" alt="Icone da Tarefa" />
-            <h1>Título da Tarrefa</h1>
+            <img src ={iconDefault} alt="Icone da Tarefa" />
+            <h3>Título da Tarefa</h3>
 
         </S.TopCard>
 
