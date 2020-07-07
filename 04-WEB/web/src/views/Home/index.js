@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// useState - 
+// useEffect - função disparada quando a tela é carregada 
+
 import * as S from './styles';
+import api from '../../services/api';
+
 //components
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -8,7 +13,28 @@ import TaskCard from '../../components/TaskCard';
 
 function Home() {
 
-  const [filterActived,setFilterActived] = useState('today');
+  const [filterActived,setFilterActived] = useState('all');
+
+  //variavel de estado ara armazenar o retorno do response 
+  const [tasks,setTasks]= useState([]);
+
+  async function loadTasks(){
+    await api.get(`/task/filter/${filterActived}/11:11:11:11:11:11`)
+    .then(response => {
+      setTasks(response.data);
+
+      //verifica conteudo
+      console.log(response.data);
+
+    })
+  }
+
+  //função disparada quando a tela é carregada conforme filtro "filterActived"
+  useEffect(() => {
+    loadTasks();
+  }, [filterActived]);
+
+
   return (
     <S.Container>
       <Header/>
@@ -42,17 +68,12 @@ function Home() {
       </S.Title>
 
       <S.Content>
-
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
+        {
+          tasks.map(t =>(
+            <TaskCard />
+          ))
+        }
+        
 
         
       </S.Content>

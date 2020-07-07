@@ -1,5 +1,5 @@
 {
-  "name": "ToDo",
+  "name": "-y",
   "version": "1.0.0",
   "description": "Desenvolvimento passo a passo de um projeto completo Full Stack com Adobe XD, NodeJs, MongoDB, ReactJs e Native \r (Curso Prof. Rodrigo Gonçalves Santana.)",
   "main": "index.js",
@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/FabioMendesBR/ToDo#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "date-fns": "^2.14.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.21"
