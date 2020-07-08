@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// useState - 
-// useEffect - função disparada quando a tela é carregada 
+// useState - recurso react - função para armazenarestados de objeto(replica a informação para todos)
+// useEffect - recurso react- função disparada quando a tela é carregada 
 
 import * as S from './styles';
 import api from '../../services/api';
@@ -13,26 +13,28 @@ import TaskCard from '../../components/TaskCard';
 
 function Home() {
 
-  const [filterActived,setFilterActived] = useState('all');
+  const [filterActived,setFilterActived] = useState('today');
 
+   
   //variavel de estado ara armazenar o retorno do response 
   const [tasks,setTasks]= useState([]);
-
+  console.log(tasks);
+  
   async function loadTasks(){
     await api.get(`/task/filter/${filterActived}/11:11:11:11:11:11`)
-    .then(response => {
-      setTasks(response.data);
-
+    .then(Response => {
+      setTasks(Response.data)
       //verifica conteudo
-      console.log(response.data);
+      console.log(Response.data);
 
     })
+    
   }
 
   //função disparada quando a tela é carregada conforme filtro "filterActived"
   useEffect(() => {
     loadTasks();
-  }, [filterActived]);
+  },[filterActived])
 
 
   return (
@@ -41,23 +43,23 @@ function Home() {
 
       <S.FilterArea>
         <button type="button" onClick = {()=> setFilterActived("all")}>
-          <FilterCard title="Todos"actived={filterActived == 'all'} />
+          <FilterCard title="Todos"actived={filterActived === 'all'} />
         </button>
 
         <button type="button" onClick = {()=> setFilterActived("today")}>
-          <FilterCard title="Hoje" actived ={filterActived == 'today'} />
+          <FilterCard title="Hoje" actived ={filterActived === 'today'} />
         </button>
 
         <button type="button"onClick = {()=> setFilterActived("week")}>
-          <FilterCard title="Semana" actived ={filterActived == 'week'} />
+          <FilterCard title="Semana" actived ={filterActived === 'week'} />
         </button>
 
         <button type="button" onClick = {()=> setFilterActived("month")}>
-          <FilterCard title="Mês" actived ={filterActived == 'month'} />
+          <FilterCard title="Mês" actived ={filterActived === 'month'} />
         </button>
 
         <button type="button"onClick = {()=> setFilterActived("year")}>
-          <FilterCard title="Ano" actived ={filterActived == 'year'} />
+          <FilterCard title="Ano" actived ={filterActived === 'year'} />
         </button>
   
       </S.FilterArea>
