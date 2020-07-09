@@ -31,7 +31,7 @@ export const RightSide = styled.div`
     align-items:center;
     justify-content: flex-end;
    
-    a{
+    a,button{
         color:#fff;
         font-weight: bold;
         text-decoration: none;
@@ -42,6 +42,12 @@ export const RightSide = styled.div`
 
         }
     }
+     
+    button{
+        background:none;
+        border: none;
+        cursor:pointer;
+    } 
 
     #notification{
         img{
@@ -62,6 +68,7 @@ export const RightSide = styled.div`
             opacity: 0.5;
         }
     }
+
     .dividir::after{
         content:"|"
         margin:0 10px;
