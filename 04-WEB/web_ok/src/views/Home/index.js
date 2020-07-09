@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// useState - recurso react - função para armazenarestados de objeto(replica a informação para todos)
-// useEffect - recurso react- função disparada quando a tela é carregada 
-
-//import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import * as S from './styles';
 
 import api from '../../services/api';
-//import isConnected from '../../utils/isConnected';
+import isConnected from '../../utils/isConnected';
 
 //NOSSOS COMPONENTES
 import Header from '../../components/Header';
@@ -17,43 +14,33 @@ import TaskCard from '../../components/TaskCard';
 function Home() {
   const [filterActived, setFilterActived] = useState('all');
   const [tasks, setTasks] = useState([]);
-  const [lateCount, setLateCount] = useState([]);
+  const [redirect, setRedirect] = useState(false);
 
 
   async function loadTasks(){
-    await api.get(`/task/filter/${filterActived}/11:11:11:11:11:11`)
+    await api.get(`/task/filter/${filterActived}/${isConnected}`)
     .then(response => {
       setTasks(response.data)
-      console.log(response.data)
     })
   }
-
-  async function lateVerify(){
-    await api.get(`/task/filter/late/11:11:11:11:11:11`)
-    .then(response => {
-      setLateCount(response.data.length)
-      console.log(response.data.length)
-    })
-  }
-
 
   function Notification(){
     setFilterActived('late');
   }
 
-
   useEffect(() => {
     loadTasks();
-    lateVerify();
 
-  }, [filterActived])
+    if(!isConnected)
+      setRedirect(true); 
 
+  }, [filterActived, loadTasks])
 
   return (
     <S.Container>
-  
-      <Header lateCount={lateCount} clickNotification={Notification}/>
-
+      { redirect && <Redirect to="/qrcode"/> }
+      <Header clickNotification={Notification}/>
+      
       <S.FilterArea>
         <button type="button"        onClick={() => setFilterActived("all")}>
           <FilterCard title="Todos"  actived={filterActived == 'all'}   />
@@ -79,11 +66,9 @@ function Home() {
       <S.Content>
         {
           tasks.map(t => (
-            <TaskCard type={t.type} title={t.title} when={t.when}/>
-
-          //<Link to={`/task/${t._id}`}>
-          //  <TaskCard type={t.type} title={t.title} when={t.when} done={t.done} />    
-          //</Link>
+          <Link to={`/task/${t._id}`}>
+            <TaskCard type={t.type} title={t.title} when={t.when} done={t.done} />    
+          </Link>
           ))  
         }
       </S.Content>

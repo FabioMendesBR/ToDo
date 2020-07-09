@@ -11,7 +11,7 @@ const { startOfDay, endOfDay,
 const current = new Date();
 
 class TaskController {
-
+    
     async create(req, res) {
         const task = new TaskModel(req.body);
         await task
@@ -88,7 +88,8 @@ class TaskController {
     async late(req, res){
         await taskModel.find({
             'when': {'$lt': current},
-            'macaddress': {'$in': req.body.macaddress}
+            'macaddress': {'$in': req.params.macaddress}
+            
         })
         .sort('when')
         .then(response =>{
